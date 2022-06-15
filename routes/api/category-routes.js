@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
   .then(dbCategoryData => {
     // no categories were found
     if(!dbCategoryData) {
-      res.status(404).json('No categories found');
+      res.status(404).json({message: 'No categories found'});
       return;
     }
     // categories were found
@@ -68,7 +68,7 @@ router.post('/', (req, res) => {
   })
   .then(dbCategoryData => {
     // category was found
-    if(dbCategoryData) res.json(`The category ${req.body.category_name} already exists`)
+    if(dbCategoryData) res.json({message: `The category ${req.body.category_name} already exists`})
     // category not found, so create new category
     else {
       Category.create({
@@ -99,7 +99,7 @@ router.put('/:id', (req, res) => {
   .then(dbCategoryData => {
     // The category was not found
     if(!dbCategoryData) {
-      res.status(404).json('No category found with this id');
+      res.status(404).json({message: 'No category found with this id'});
       return;
     }
     // the category was found
@@ -122,7 +122,7 @@ router.delete('/:id', (req, res) => {
   .then(dbCategoryData => {
     // The category was not found
     if(!dbCategoryData) {
-      res.status(404).json('No category found with this id');
+      res.status(404).json({message: 'No category found with this id'});
       return;
     }
     // the category was found
