@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
   })
   .then(dbCategoryData => {
     // no categories were found
-    if(!dbCategoryData) {
+    if(!dbCategoryData.length) {
       res.status(404).json({message: 'No categories found'});
       return;
     }
@@ -71,9 +71,7 @@ router.post('/', (req, res) => {
     if(dbCategoryData) res.json({message: `The category ${req.body.category_name} already exists`})
     // category not found, so create new category
     else {
-      Category.create({
-        category_name: req.body.category_name
-      })
+      Category.create(req.body)
       .then(newDBCategoryData => res.json(newDBCategoryData))
       .catch(err => {
         console.log(err);
