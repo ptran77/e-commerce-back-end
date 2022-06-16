@@ -72,7 +72,7 @@ router.post('/', (req, res) => {
     // category not found, so create new category
     else {
       Category.create(req.body)
-      .then(newDBCategoryData => res.json(newDBCategoryData))
+      .then(newCategory => res.json(newCategory))
       .catch(err => {
         console.log(err);
         res.status(500).json(err);
