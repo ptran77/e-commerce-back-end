@@ -74,15 +74,7 @@ router.put('/:id', (req, res) => {
       id: req.params.id
     }
   })
-  .then(dbTagData => {
-    // The tag was not found
-    if(!dbTagData) {
-      res.status(404).json({message: 'No tag found with this id'});
-      return;
-    }
-    // the tag was found
-    res.json(dbTagData);
-  })
+  .then(dbTagData => res.json(dbTagData))
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
@@ -100,7 +92,7 @@ router.delete('/:id', (req, res) => {
   })
   .then(dbTagData => {
     // The tag was not found
-    if(!dbTagData) {
+    if(!dbTagData[0]) {
       res.status(404).json({message: 'No tag found with this id'});
       return;
     }
